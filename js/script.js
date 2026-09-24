@@ -86,3 +86,62 @@ if (continueReading) {
         `;
     }
 }
+
+const bookmarkedReading = document.getElementById("bookmarkedReading");
+
+if (bookmarkedReading) {
+    const savedBooks = [
+        { key: "html", name: "HTML" },
+        { key: "css", name: "CSS" },
+        { key: "javascript", name: "JavaScript" }
+    ];
+
+    let bookmarkCards = "";
+
+    savedBooks.forEach(function (item) {
+        const bookmarks = JSON.parse(
+            localStorage.getItem("rnLibrary_" + item.key + "_bookmarks")
+        ) || [];
+
+        bookmarks.forEach(function (chapter) {
+            bookmarkCards += `
+                <div class="bookmark-card">
+                    <div class="bookmark-info">
+                        <h3>${item.name}</h3>
+                        <p>Chapter ${chapter + 1}</p>
+                    </div>
+
+                    <button class="bookmark-open-btn" onclick="removeBookmark('${item.key}', ${chapter})" type="button">
+                        Remove Bookmark
+                    </button>
+                </div>
+            `;
+        });
+    });
+
+    if (bookmarkCards) {
+        bookmarkedReading.innerHTML = bookmarkCards;
+    } else {
+        bookmarkedReading.innerHTML = `
+            <p>No bookmarked chapters yet.</p>
+        `;
+    }
+}
+
+function removeBookmark(bookKey, chapter) {
+    let bookmarks = JSON.parse(
+        localStorage.getItem("rnLibrary_" + bookKey + "_bookmarks")
+    ) || [];
+
+    bookmarks = bookmarks.filter(function (item) {
+        return item !== chapter;
+    });
+
+    localStorage.setItem(
+        "rnLibrary_" + bookKey + "_bookmarks",
+        JSON.stringify(bookmarks)
+    );
+
+    location.reload();
+}
+

@@ -15,6 +15,7 @@ const progressFill = document.getElementById("progressFill");
 const completeButton = document.getElementById("completeChapter");
 const completedCount = document.getElementById("completedCount");
 const completedPercent = document.getElementById("completedPercent");
+const bookmarkButton = document.getElementById("bookmarkChapter");
 
 
 
@@ -93,6 +94,31 @@ const books = {
 const chapterList = document.getElementById("chapterList");
 
 const currentBook = books[book] || books.html;
+
+let bookmarkedChapters = JSON.parse(localStorage.getItem("rnLibrary_" + book + "_bookmarks")) || [];
+
+function updateBookmarkButton() {
+    if (bookmarkedChapters.includes(currentChapter)) {
+        bookmarkButton.classList.add("bookmarked");
+        bookmarkButton.textContent = "🔖 Bookmarked";
+    } else {
+        bookmarkButton.classList.remove("bookmarked");
+        bookmarkButton.textContent = "🔖 Bookmark Chapter";
+    }
+}
+
+bookmarkButton.addEventListener("click", function () {
+    if (bookmarkedChapters.includes(currentChapter)) {
+        bookmarkedChapters = bookmarkedChapters.filter(function (chapter) {
+            return chapter !== currentChapter;
+        });
+    } else {
+        bookmarkedChapters.push(currentChapter);
+    }
+
+    localStorage.setItem("rnLibrary_" + book + "_bookmarks", JSON.stringify(bookmarkedChapters));
+    updateBookmarkButton();
+});
 const chapterParam = parseInt(params.get("chapter"));
 
 let currentChapter = !isNaN(chapterParam)
@@ -173,6 +199,7 @@ function showChapter() {
     chapterText.textContent = chapter.text;
     codeExample.textContent = chapter.code;
     updateCompletedButton();
+    updateBookmarkButton();
 
     const chapterButtons = document.querySelectorAll(".chapter-item");
 
