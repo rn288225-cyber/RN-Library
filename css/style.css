@@ -381,3 +381,31 @@ footer {
         gap: 10px;
     }
 }
+
+.chapter-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 35px;
+}
+
+.chapter-nav button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.chapter-nav button:hover {
+    opacity: 0.9;
+}
+
+@media (max-width: 500px) {
+    .chapter-nav {
+        flex-direction: column;
+    }
+}
+
