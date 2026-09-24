@@ -93,9 +93,13 @@ const books = {
 const chapterList = document.getElementById("chapterList");
 
 const currentBook = books[book] || books.html;
-let currentChapter = parseInt(
-    localStorage.getItem("rnLibrary_" + book + "_lastChapter")
-) || 0;
+const chapterParam = parseInt(params.get("chapter"));
+
+let currentChapter = !isNaN(chapterParam)
+    ? chapterParam
+    : parseInt(
+        localStorage.getItem("rnLibrary_" + book + "_lastChapter")
+      ) || 0;
 let completedChapters = JSON.parse(
     localStorage.getItem("rnLibrary_" + book + "_completed")
 ) || [];
