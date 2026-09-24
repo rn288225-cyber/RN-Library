@@ -30,3 +30,27 @@ searchBtn.addEventListener("click", function () {
         alert("No book found for: " + query);
     }
 });
+
+const readButtons = document.querySelectorAll(".read-btn");
+
+readButtons.forEach(function (button) {
+
+    button.addEventListener("click", function () {
+
+        const book = button.getAttribute("data-book");
+
+        if (book === "html") {
+            window.location.href = "book.html?book=" + book;
+        }
+
+        if (book === "css") {
+            window.location.href = "book.html?book=" + book;
+        }
+
+        if (book === "javascript") {
+            window.location.href = "book.html?book=" + book;
+        }
+
+    });
+
+});
