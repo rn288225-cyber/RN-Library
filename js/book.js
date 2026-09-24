@@ -9,6 +9,9 @@ const codeExample = document.getElementById("codeExample");
 
 const prevButton = document.getElementById("prevChapter");
 const nextButton = document.getElementById("nextChapter");
+const chapterProgress = document.getElementById("chapterProgress");
+const progressPercent = document.getElementById("progressPercent");
+const progressFill = document.getElementById("progressFill");
 
 const books = {
 
@@ -93,6 +96,14 @@ function showChapter() {
     chapterTitle.textContent = chapter.title;
     chapterText.textContent = chapter.text;
     codeExample.textContent = chapter.code;
+
+    const totalChapters = currentBook.chapters.length;
+    const currentNumber = currentChapter + 1;
+    const percent = Math.round((currentNumber / totalChapters) * 100);
+
+    chapterProgress.textContent = "Chapter " + currentNumber + " of " + totalChapters;
+    progressPercent.textContent = percent + "%";
+    progressFill.style.width = percent + "%";
 
     prevButton.disabled = currentChapter === 0;
     nextButton.disabled = currentChapter === currentBook.chapters.length - 1;
