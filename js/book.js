@@ -94,7 +94,11 @@ const chapterList = document.getElementById("chapterList");
 
 const currentBook = books[book] || books.html;
 let currentChapter = 0;
-let completedChapters = [];
+let completedChapters = JSON.parse(
+    localStorage.getItem("rnLibrary_" + book + "_completed")
+) || [];
+
+
 
 bookTitle.textContent = currentBook.title;
 bookIntro.textContent = currentBook.intro;
@@ -118,6 +122,12 @@ currentBook.chapters.forEach(function (chapter, index) {
 
 completeButton.addEventListener("click", function () {
     completedChapters[currentChapter] = !completedChapters[currentChapter];
+
+    localStorage.setItem(
+        "rnLibrary_" + book + "_completed",
+        JSON.stringify(completedChapters)
+    );
+
     updateCompletedButton();
     updateOverallProgress();
 });
