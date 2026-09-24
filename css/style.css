@@ -437,3 +437,81 @@ footer {
     transition: width 0.3s ease;
 }
 
+
+.chapter-list {
+    margin: 25px 0;
+    padding: 20px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+}
+
+.chapter-list h3 {
+    margin: 0 0 15px;
+    color: #172033;
+}
+
+#chapterList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.chapter-item {
+    padding: 12px 15px;
+    border: none;
+    border-radius: 8px;
+    background: white;
+    color: #334155;
+    text-align: left;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.chapter-item:hover {
+    background: #eaf2ff;
+}
+
+.chapter-item.active {
+    background: #2563eb;
+    color: white;
+}
+
+
+#chapterList .chapter-item.active {
+    background: #2563eb !important;
+    color: white !important;
+}
+
+
+#chapterList button.chapter-item.active,
+#chapterList .chapter-item.active {
+    background-color: #2563eb !important;
+    color: #ffffff !important;
+    border: 2px solid #2563eb !important;
+    opacity: 1 !important;
+}
+
+
+.complete-btn {
+    margin: 15px 0 25px;
+    padding: 11px 18px;
+    border: 2px solid #2563eb;
+    border-radius: 10px;
+    background: white;
+    color: #2563eb;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.complete-btn:hover {
+    background: #eaf2ff;
+}
+
+.complete-btn.completed {
+    background: #16a34a;
+    border-color: #16a34a;
+    color: white;
+}
+

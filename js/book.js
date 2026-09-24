@@ -12,6 +12,9 @@ const nextButton = document.getElementById("nextChapter");
 const chapterProgress = document.getElementById("chapterProgress");
 const progressPercent = document.getElementById("progressPercent");
 const progressFill = document.getElementById("progressFill");
+const completeButton = document.getElementById("completeChapter");
+
+
 
 const books = {
 
@@ -83,11 +86,46 @@ const books = {
 
 };
 
+const chapterList = document.getElementById("chapterList");
+
 const currentBook = books[book] || books.html;
 let currentChapter = 0;
+let completedChapters = [];
 
 bookTitle.textContent = currentBook.title;
 bookIntro.textContent = currentBook.intro;
+
+currentBook.chapters.forEach(function (chapter, index) {
+    const chapterButton = document.createElement("button");
+
+    chapterButton.className = "chapter-item";
+    chapterButton.textContent = chapter.title;
+
+    chapterButton.addEventListener("click", function () {
+        currentChapter = index;
+        showChapter();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    chapterList.appendChild(chapterButton);
+});
+
+
+
+completeButton.addEventListener("click", function () {
+    completedChapters[currentChapter] = !completedChapters[currentChapter];
+    updateCompletedButton();
+});
+
+function updateCompletedButton() {
+    if (completedChapters[currentChapter]) {
+        completeButton.classList.add("completed");
+        completeButton.textContent = "✓ Completed";
+    } else {
+        completeButton.classList.remove("completed");
+        completeButton.textContent = "✓ Mark as Completed";
+    }
+}
 
 function showChapter() {
 
@@ -96,6 +134,17 @@ function showChapter() {
     chapterTitle.textContent = chapter.title;
     chapterText.textContent = chapter.text;
     codeExample.textContent = chapter.code;
+    updateCompletedButton();
+
+    const chapterButtons = document.querySelectorAll(".chapter-item");
+
+    chapterButtons.forEach(function (button) {
+        button.classList.remove("active");
+    });
+
+    if (chapterButtons[currentChapter]) {
+        chapterButtons[currentChapter].classList.add("active");
+    }
 
     const totalChapters = currentBook.chapters.length;
     const currentNumber = currentChapter + 1;
