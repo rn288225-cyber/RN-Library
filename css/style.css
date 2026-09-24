@@ -515,3 +515,21 @@ footer {
     color: white;
 }
 
+
+.overall-progress {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 20px;
+    padding: 12px 15px;
+    background: #f1f5f9;
+    border-radius: 10px;
+    color: #475569;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+#completedPercent {
+    color: #16a34a;
+}
+

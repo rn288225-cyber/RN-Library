@@ -13,6 +13,10 @@ const chapterProgress = document.getElementById("chapterProgress");
 const progressPercent = document.getElementById("progressPercent");
 const progressFill = document.getElementById("progressFill");
 const completeButton = document.getElementById("completeChapter");
+const completedCount = document.getElementById("completedCount");
+const completedPercent = document.getElementById("completedPercent");
+
+
 
 
 
@@ -115,7 +119,19 @@ currentBook.chapters.forEach(function (chapter, index) {
 completeButton.addEventListener("click", function () {
     completedChapters[currentChapter] = !completedChapters[currentChapter];
     updateCompletedButton();
+    updateOverallProgress();
 });
+
+function updateOverallProgress() {
+    const completedTotal = completedChapters.filter(Boolean).length;
+    const totalChapters = currentBook.chapters.length;
+    const percent = Math.round((completedTotal / totalChapters) * 100);
+
+    completedCount.textContent =
+        completedTotal + " / " + totalChapters + " chapters completed";
+
+    completedPercent.textContent = percent + "%";
+}
 
 function updateCompletedButton() {
     if (completedChapters[currentChapter]) {
@@ -128,6 +144,8 @@ function updateCompletedButton() {
 }
 
 function showChapter() {
+    updateOverallProgress();
+
 
     const chapter = currentBook.chapters[currentChapter];
 
