@@ -93,7 +93,9 @@ const books = {
 const chapterList = document.getElementById("chapterList");
 
 const currentBook = books[book] || books.html;
-let currentChapter = 0;
+let currentChapter = parseInt(
+    localStorage.getItem("rnLibrary_" + book + "_lastChapter")
+) || 0;
 let completedChapters = JSON.parse(
     localStorage.getItem("rnLibrary_" + book + "_completed")
 ) || [];
@@ -156,6 +158,10 @@ function updateCompletedButton() {
 function showChapter() {
     updateOverallProgress();
 
+    localStorage.setItem(
+        "rnLibrary_" + book + "_lastChapter",
+        currentChapter
+    );
 
     const chapter = currentBook.chapters[currentChapter];
 
