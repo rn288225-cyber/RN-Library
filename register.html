@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - RN Library</title>
+    <link rel="stylesheet" href="css/style.css?v=7">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">📚 RN Library</div>
+        <a href="index.html" class="back-btn">← Back to Library</a>
+    </header>
+
+    <main class="auth-page">
+
+        <section class="auth-card">
+
+            <p class="section-tag">JOIN RN LIBRARY</p>
+
+            <h1>Create Account</h1>
+
+            <p class="auth-intro">
+                Create your personal RN Library account.
+            </p>
+
+            <form id="registerForm">
+
+                <label for="registerName">Full Name</label>
+                <input
+                    type="text"
+                    id="registerName"
+                    placeholder="Enter your name"
+                    required
+                >
+
+                <label for="registerEmail">Email</label>
+                <input
+                    type="email"
+                    id="registerEmail"
+                    placeholder="Enter your email"
+                    required
+                >
+
+                <label for="registerPassword">Password</label>
+                <input
+                    type="password"
+                    id="registerPassword"
+                    placeholder="Create a password"
+                    minlength="6"
+                    required
+                >
+
+                <label for="confirmPassword">Confirm Password</label>
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm your password"
+                    minlength="6"
+                    required
+                >
+
+                <button type="submit" class="auth-submit">
+                    Create Account
+                </button>
+
+            </form>
+
+            <p class="auth-switch">
+                Already have an account?
+                <a href="login.html">Login</a>
+            </p>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 RN Library. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
