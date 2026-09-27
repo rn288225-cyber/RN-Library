@@ -20,10 +20,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             header("Location: dashboard.php");
             exit;
         } else {
-            echo "Invalid email or password.";
+            header("Location: login.html?error=invalid");
+            exit;
         }
     } else {
-        echo "Invalid email or password.";
+        header("Location: login.html?error=invalid");
+            exit;
     }
 
     $stmt->close();
