@@ -17,7 +17,7 @@ $name = htmlspecialchars($_SESSION["user_name"]);
 <body>
 <header class="navbar">
 <div class="logo">📚 RN Library</div>
-<a href="index.html" class="back-btn">← Back to Library</a>
+<a href="index.php" class="back-btn">← Back to Library</a>
 </header>
 <main class="auth-page">
 <section class="auth-card">
