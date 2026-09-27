@@ -41,12 +41,15 @@
                 >
 
                 <label for="loginPassword">Password</label>
-                <input
-                    type="password"
-                    id="loginPassword" name="password"
-                    placeholder="Enter your password"
-                    required
-                >
+                <div class="password-wrap">
+                    <input
+                        type="password"
+                        id="loginPassword" name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+                    <button type="button" id="toggleLoginPassword">👁️</button>
+                </div>
 
                 <button type="submit" class="auth-submit">
                     Login
@@ -68,6 +71,19 @@
     </footer>
 
 <script>
+const loginPassword = document.getElementById("loginPassword");
+const toggleLoginPassword = document.getElementById("toggleLoginPassword");
+
+toggleLoginPassword.addEventListener("click", function () {
+    if (loginPassword.type === "password") {
+        loginPassword.type = "text";
+        this.textContent = "🙈";
+    } else {
+        loginPassword.type = "password";
+        this.textContent = "👁️";
+    }
+});
+
 const params = new URLSearchParams(window.location.search);
 if (params.get("error") === "invalid") {
     document.getElementById("loginError").style.display = "block";
