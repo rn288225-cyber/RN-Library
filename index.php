@@ -1,0 +1,146 @@
+<?php session_start(); ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RN Library</title>
+    <link rel="stylesheet" href="css/style.css?v=6">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">📚 RN Library</div>
+
+        <nav>
+            <a href="#">Home</a>
+            <a href="#books">Books</a>
+            <a href="#categories">Categories</a>
+            <a href="#about">About</a>
+        </nav>
+
+        <?php if (isset($_SESSION["user_id"])): ?>
+            <a href="dashboard.php" class="login-btn">👤 Dashboard</a>
+        <?php else: ?>
+            <a href="login.html" class="login-btn">Login</a>
+        <?php endif; ?>
+    </header>
+
+    <main>
+
+        <section class="hero">
+            <div class="hero-content">
+                <p class="hero-tag">YOUR DIGITAL LIBRARY</p>
+
+                <h1>
+                    Discover your next
+                    <span>great book.</span>
+                </h1>
+
+                <p class="hero-text">
+                    Explore books, discover new topics, and build your
+                    personal digital library with RN Library.
+                </p>
+
+                <div class="search-box">
+                    <input
+                        type="text"
+                        placeholder="Search books..."
+                        id="searchInput"
+                    >
+                    <button id="searchBtn">Search</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="categories">
+            <div class="section-heading">
+                <div>
+                    <p class="section-tag">EXPLORE</p>
+                    <h2>Popular Categories</h2>
+                </div>
+            </div>
+
+            <div class="category-grid">
+                <div class="category-card">💻 Programming</div>
+                <div class="category-card">📊 Business</div>
+                <div class="category-card">🧠 Psychology</div>
+                <div class="category-card">🚀 Self Development</div>
+            </div>
+        </section>
+
+        <section class="section" id="books">
+            <div class="section-heading">
+                <div>
+                    <p class="section-tag">COLLECTION</p>
+                    <h2>Featured Books</h2>
+                </div>
+
+                <button class="view-btn">View All</button>
+            </div>
+
+            <div class="book-grid">
+
+                <article class="book-card">
+                    <div class="book-cover">HTML</div>
+                    <div class="book-info">
+                        <span>Programming</span>
+                        <h3>Learn HTML</h3>
+                        <p>Beginner friendly web development.</p>
+                        <button class="read-btn" data-book="html">Read Book</button>
+                    </div>
+                </article>
+
+                <article class="book-card">
+                    <div class="book-cover">CSS</div>
+                    <div class="book-info">
+                        <span>Design</span>
+                        <h3>Master CSS</h3>
+                        <p>Create beautiful responsive websites.</p>
+                        <button class="read-btn" data-book="css">Read Book</button>
+                    </div>
+                </article>
+
+                <article class="book-card">
+                    <div class="book-cover">JS</div>
+                    <div class="book-info">
+                        <span>Programming</span>
+                        <h3>JavaScript Basics</h3>
+                        <p>Learn the language of the web.</p>
+                        <button class="read-btn" data-book="javascript">Read Book</button>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="continue-reading">
+    <h2>📖 Continue Reading</h2>
+    <div id="continueReading"></div>
+</section>
+
+<section class="bookmarked-reading">
+    <h2>🔖 Bookmarked Chapters</h2>
+    <div id="bookmarkedReading"></div>
+</section>
+
+<section class="about" id="about">
+            <p class="section-tag">ABOUT RN LIBRARY</p>
+            <h2>A simple place to discover knowledge.</h2>
+            <p>
+                RN Library is a digital library project designed to make
+                discovering and managing books simple and enjoyable.
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 RN Library. All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js?v=20"></script>
+
+</body>
+</html>
