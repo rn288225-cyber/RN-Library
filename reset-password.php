@@ -2,6 +2,7 @@
 require "config.php";
 
 $email = trim($_POST["email"] ?? "");
+$token = trim($_POST["token"] ?? "");
 $password = $_POST["password"] ?? "";
 $confirm = $_POST["confirm_password"] ?? "";
 
@@ -10,8 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     exit;
 }
 
-if ($email === "") {
-    die("Email is required.");
+if ($email === "" || $token === "") {
+    die("Email and reset token are required.");
 }
 
 if (strlen($password) < 6) {
@@ -22,30 +23,35 @@ if ($password !== $confirm) {
     die("Passwords do not match.");
 }
 
-$check = $conn->prepare("SELECT id FROM users WHERE email = ?");
-$check->bind_param("s", $email);
-$check->execute();
-$result = $check->get_result();
+$stmt = $conn->prepare(
+    "SELECT id FROM users WHERE email = ? AND reset_token = ? AND reset_expires > NOW()"
+);
+$stmt->bind_param("ss", $email, $token);
+$stmt->execute();
+
+$result = $stmt->get_result();
 
 if ($result->num_rows !== 1) {
-    $check->close();
-    die("No account found with this email.");
+    $stmt->close();
+    die("Invalid or expired reset token.");
 }
 
 $user = $result->fetch_assoc();
-$check->close();
+$stmt->close();
 
 $hash = password_hash($password, PASSWORD_DEFAULT);
 
-$stmt = $conn->prepare("UPDATE users SET password = ? WHERE id = ?");
-$stmt->bind_param("si", $hash, $user["id"]);
+$update = $conn->prepare(
+    "UPDATE users SET password = ?, reset_token = NULL, reset_expires = NULL WHERE id = ?"
+);
+$update->bind_param("si", $hash, $user["id"]);
 
-if ($stmt->execute()) {
+if ($update->execute()) {
     echo 'Password reset successfully. <a href="login.html">Login now</a>';
 } else {
     echo "Password reset failed.";
 }
 
-$stmt->close();
+$update->close();
 $conn->close();
 ?>
